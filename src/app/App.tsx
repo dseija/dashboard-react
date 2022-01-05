@@ -1,7 +1,8 @@
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
-import Home from './home/Home';
-import Todos from './todos/Todos';
-import Users from './users/Users';
+import Home from '../home/Home';
+import TodoProvider from '../todos/TodoContext';
+import Todos from '../todos/Todos';
+import Users from '../users/Users';
 
 function App() {
   return (
@@ -20,10 +21,18 @@ function App() {
         </ul>
       </div>
       <hr />
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/users" element={<Users />} />
-        <Route path="/todos" element={<Todos />} />
+        <Route
+          path="/todos"
+          element={
+            <TodoProvider>
+              <Todos />
+            </TodoProvider>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
