@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { TodoContext } from './TodoContext';
+import TodoElement from './TodoElement';
 import { Todo, TodoDefault } from './todoModel';
 import TodoService from './todoService';
 
@@ -30,8 +31,7 @@ function Todos() {
       <ul>
         {todoList.map((todo: Todo) => (
           <li key={todo.id}>
-            <h3>{todo.title}</h3>
-            <p>Status: {todo.completed ? 'Completed' : 'Pending'}</p>
+            <TodoElement data={todo} />
           </li>
         ))}
       </ul>
