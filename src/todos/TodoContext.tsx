@@ -7,6 +7,7 @@ export const TodoContext = contextGenerator(defaultValue);
 
 const TodoProvider = (props: any) => {
   const [todoList, setTodoList] = useState<Todo[]>(defaultValue);
+
   return (
     <TodoContext.Provider value={[todoList, setTodoList]}>
       {props.children}

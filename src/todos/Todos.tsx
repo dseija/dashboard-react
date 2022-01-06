@@ -1,37 +1,23 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { TodoContext } from './TodoContext';
-import { Todo } from './todoModel';
+import { Todo, TodoDefault } from './todoModel';
+import TodoService from './todoService';
 
 function Todos() {
-  const [todoList, setTodoList] = useContext(TodoContext);
+  const service = new TodoService('todos', TodoDefault);
 
-  const getTodos = () => {
-    setTodoList([
-      {
-        userId: 1,
-        id: 1,
-        title: 'delectus aut autem',
-        completed: false,
-      },
-      {
-        userId: 1,
-        id: 2,
-        title: 'quis ut nam facilis et officia qui',
-        completed: false,
-      },
-      {
-        userId: 1,
-        id: 3,
-        title: 'fugiat veniam minus',
-        completed: false,
-      },
-      {
-        userId: 1,
-        id: 4,
-        title: 'et porro tempora',
-        completed: true,
-      },
-    ]);
+  const [todoList, setTodoList] = useContext(TodoContext);
+  const [loading, setLoading] = useState(false);
+
+  const getTodos = async () => {
+    setLoading(true);
+    try {
+      const response = await service.getAll();
+      setTodoList(response.data);
+    } catch (e) {
+      console.error(e);
+    }
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -39,14 +25,17 @@ function Todos() {
   }, []);
 
   return (
-    <ul>
-      {todoList.map((todo: Todo) => (
-        <li key={todo.id}>
-          <h3>{todo.title}</h3>
-          <p>Status: {todo.completed ? 'Completed' : 'Pending'}</p>
-        </li>
-      ))}
-    </ul>
+    <div>
+      {loading && <p>Loading...</p>}
+      <ul>
+        {todoList.map((todo: Todo) => (
+          <li key={todo.id}>
+            <h3>{todo.title}</h3>
+            <p>Status: {todo.completed ? 'Completed' : 'Pending'}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
