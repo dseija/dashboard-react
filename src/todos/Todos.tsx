@@ -15,8 +15,8 @@ function Todos() {
     try {
       const response = await service.getAll();
       setTodoList(response.data);
-    } catch (e) {
-      console.error(e);
+    } catch (error) {
+      console.error(error);
     }
     setLoading(false);
   };
