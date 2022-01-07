@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { TodoContext } from './TodoContext';
-import TodoElement from './TodoElement';
+import TodoCard from './TodoCard';
 import { Todo, TodoDefault } from './todoModel';
 import TodoService from './todoService';
 
@@ -31,7 +31,7 @@ function Todos() {
       <ul>
         {todoList.map((todo: Todo) => (
           <li key={todo.id}>
-            <TodoElement data={todo} />
+            <TodoCard data={todo} />
           </li>
         ))}
       </ul>

@@ -1,6 +1,6 @@
 import { Todo } from './todoModel';
 
-function TodoElement({ data }: { data: Todo }) {
+function TodoCard({ data }: { data: Todo }) {
   return (
     <div>
       <h3>{data.title}</h3>
@@ -9,4 +9,4 @@ function TodoElement({ data }: { data: Todo }) {
   );
 }
 
-export default TodoElement;
+export default TodoCard;
