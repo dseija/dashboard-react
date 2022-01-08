@@ -26,7 +26,7 @@ export default class RequestService {
   }
 
   update(data: typeof this.defaultResourceValue) {
-    return this.handler.get(`${this.resourceName}/${data.id}`, data);
+    return this.handler.put(`${this.resourceName}/${data.id}`, data);
   }
 
   remove(id: number | string) {

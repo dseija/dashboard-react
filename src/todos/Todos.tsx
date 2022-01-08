@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { TodoContext } from './TodoContext';
 import TodoCard from './TodoCard';
-import { Todo, TodoDefault } from './todoModel';
+import { ITodo, TodoDefault } from './todoModel';
 import TodoService from './todoService';
+import { Link, Outlet } from 'react-router-dom';
 
 function Todos() {
   const service = new TodoService('todos', TodoDefault);
@@ -27,11 +28,13 @@ function Todos() {
 
   return (
     <div>
-      {loading && <p>Loading...</p>}
+      {loading && <p>Loading Todos...</p>}
       <ul>
-        {todoList.map((todo: Todo) => (
+        {todoList.map((todo: ITodo) => (
           <li key={todo.id}>
-            <TodoCard data={todo} />
+            <Link to={`/todos/${todo.id}`} key={todo.id}>
+              <TodoCard data={todo} />
+            </Link>
           </li>
         ))}
       </ul>

@@ -1,6 +1,6 @@
-import { Todo } from './todoModel';
+import { ITodo } from './todoModel';
 
-function TodoCard({ data }: { data: Todo }) {
+function TodoCard({ data }: { data: ITodo }) {
   return (
     <div>
       <h3>{data.title}</h3>

@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { contextGenerator } from '../shared/utils/contextHelper';
-import { Todo } from './todoModel';
+import { ITodo } from './todoModel';
 
-const defaultValue: Todo[] = [];
+const defaultValue: ITodo[] = [];
 export const TodoContext = contextGenerator(defaultValue);
 
 const TodoProvider = (props: any) => {
-  const [todoList, setTodoList] = useState<Todo[]>(defaultValue);
+  const [todoList, setTodoList] = useState<ITodo[]>(defaultValue);
 
   return (
     <TodoContext.Provider value={[todoList, setTodoList]}>

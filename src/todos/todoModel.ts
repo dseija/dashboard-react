@@ -1,11 +1,11 @@
-export interface Todo {
+export interface ITodo {
   completed: boolean;
   id?: number;
   title: string;
   userId?: number;
 }
 
-export const TodoDefault: Todo = {
+export const TodoDefault: ITodo = {
   completed: false,
   title: '',
 };
