@@ -1,35 +1,56 @@
-import axios from 'axios';
+import axios, { AxiosInstance, AxiosResponse } from 'axios';
 import { BASE_URL } from '../constants/request';
 
-export default class RequestService {
-  private handler;
+const requestHandler: AxiosInstance = axios.create({
+  baseURL: BASE_URL,
+  headers: {
+    'Content-type': 'application/json',
+  },
+});
 
-  constructor(private resourceName: string, private defaultResourceValue: any) {
-    this.handler = axios.create({
-      baseURL: BASE_URL,
-      headers: {
-        'Content-type': 'application/json',
-      },
-    });
-  }
+export function getAll(resourceName: string): Promise<AxiosResponse> {
+  console.log('->getAll');
+  return requestHandler.get(resourceName);
+}
 
-  getAll() {
-    return this.handler.get(this.resourceName);
-  }
+export function get(
+  resourceName: string,
+  id: number | string
+): Promise<AxiosResponse> {
+  console.log('->get');
+  return requestHandler.get(`${resourceName}/${id}`);
+}
 
-  get(id: number | string) {
-    return this.handler.get(`${this.resourceName}/${id}`);
-  }
+export function create(
+  resourceName: string,
+  data: any = {}
+): Promise<AxiosResponse> {
+  return requestHandler.post(resourceName, data);
+}
 
-  create(data: typeof this.defaultResourceValue) {
-    return this.handler.post(this.resourceName, data);
-  }
+export function update(
+  resourceName: string,
+  data: any = {}
+): Promise<AxiosResponse> {
+  return requestHandler.get(`${resourceName}/${data.id}`, data);
+}
 
-  update(data: typeof this.defaultResourceValue) {
-    return this.handler.put(`${this.resourceName}/${data.id}`, data);
-  }
+export function remove(
+  resourceName: string,
+  id: number | string
+): Promise<AxiosResponse> {
+  return requestHandler.delete(`${resourceName}/${id}`);
+}
 
-  remove(id: number | string) {
-    return this.handler.delete(`${this.resourceName}/${id}`);
-  }
+export function defaultRequestService(
+  resourceName: string,
+  defaultResourceValue: any
+) {
+  return {
+    getAll: () => getAll(resourceName),
+    get: (id: number | string) => get(resourceName, id),
+    create: (data: typeof defaultResourceValue) => create(resourceName, data),
+    update: (data: typeof defaultResourceValue) => update(resourceName, data),
+    remove: (id: number | string) => remove(resourceName, id),
+  };
 }

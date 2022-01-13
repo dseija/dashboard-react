@@ -5,8 +5,6 @@ import { ITodo, TodoDefault } from './todoModel';
 import TodoService from './todoService';
 
 function Todo() {
-  const service = new TodoService('todos', TodoDefault);
-
   const params = useParams();
   const [todo, setTodo] = useState<ITodo>(TodoDefault);
   const [loading, setLoading] = useState(false);
@@ -20,7 +18,7 @@ function Todo() {
     setLoading(true);
     try {
       if (params.todoId && params.todoId !== 'new') {
-        const response = await service.get(params.todoId);
+        const response = await TodoService.get(params.todoId);
         setTodo(response.data);
       }
     } catch (error) {
@@ -42,9 +40,9 @@ function Todo() {
     setSaving(true);
     try {
       if (params.todoId === 'new') {
-        await service.create(todo);
+        await TodoService.create(todo);
       } else {
-        await service.update(todo);
+        await TodoService.update(todo);
       }
     } catch (error) {
       console.error(error);

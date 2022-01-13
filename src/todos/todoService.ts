@@ -1,3 +1,9 @@
-import RequestService from '../shared/services/requestService';
+import { defaultRequestService } from '../shared/services/requestService';
+import { TodoDefault } from './todoModel';
 
-export default class TodoService extends RequestService {}
+const TodoService = defaultRequestService('todo', TodoDefault);
+// const TodoService = {
+//   getTodos: () => getAll('todos')
+// };
+
+export default TodoService;
