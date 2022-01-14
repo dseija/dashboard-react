@@ -7,5 +7,5 @@ export interface ITodo {
 
 export const TodoDefault: ITodo = {
   completed: false,
-  title: '',
+  title: 'Todo Name',
 };

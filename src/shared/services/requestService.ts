@@ -9,7 +9,6 @@ const requestHandler: AxiosInstance = axios.create({
 });
 
 export function getAll(resourceName: string): Promise<AxiosResponse> {
-  console.log('->getAll');
   return requestHandler.get(resourceName);
 }
 
@@ -17,7 +16,6 @@ export function get(
   resourceName: string,
   id: number | string
 ): Promise<AxiosResponse> {
-  console.log('->get');
   return requestHandler.get(`${resourceName}/${id}`);
 }
 
