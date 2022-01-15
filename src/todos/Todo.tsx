@@ -1,17 +1,22 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getFormKey } from '../shared/utils/formatHelper';
+import { UserContext } from '../users/UserContext';
+import { getUsers } from '../users/userService';
 import { ITodo, TodoDefault } from './todoModel';
 import { createTodo, getTodo, updateTodo } from './todoService';
 
 function Todo() {
   const params = useParams();
+  const [userList, setUserList] = useContext(UserContext);
   const [todo, setTodo] = useState<ITodo>(TodoDefault);
+  const [usersReady, setUsersReady] = useState(false);
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     getTodoData();
+    fetchUserList();
   }, []);
 
   const getTodoData = async () => {
@@ -25,6 +30,19 @@ function Todo() {
       console.error(error);
     }
     setLoading(false);
+  };
+
+  const fetchUserList = async () => {
+    setUsersReady(false);
+    try {
+      if (!userList.length) {
+        const response = await getUsers();
+        setUserList(response.data);
+        setUsersReady(true);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
@@ -74,11 +92,19 @@ function Todo() {
             checked={todo.completed}
           ></input>
         </div>
-        <input
-          type="submit"
-          disabled={saving}
-          value={saving ? 'Saving...' : 'Save'}
-        />
+        <div>
+          <label>User</label>
+          <select name="todo-userId" id="todo-userId">
+            {/* userList... */}
+          </select>
+        </div>
+        <div>
+          <input
+            type="submit"
+            disabled={saving}
+            value={saving ? 'Saving...' : 'Save'}
+          />
+        </div>
       </form>
     </div>
   );

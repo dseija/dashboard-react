@@ -9,7 +9,7 @@ function Todos() {
   const [todoList, setTodoList] = useContext(TodoContext);
   const [loading, setLoading] = useState(false);
 
-  const getTodoList = async () => {
+  const fetchTodoList = async () => {
     setLoading(true);
     try {
       const response = await getTodos();
@@ -21,7 +21,7 @@ function Todos() {
   };
 
   useEffect(() => {
-    if (!todoList.length) getTodoList();
+    if (!todoList.length) fetchTodoList();
   }, []);
 
   return (
