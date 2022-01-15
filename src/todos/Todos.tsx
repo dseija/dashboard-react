@@ -2,17 +2,17 @@ import React, { useContext, useEffect, useState } from 'react';
 import { TodoContext } from './TodoContext';
 import TodoCard from './TodoCard';
 import { ITodo } from './todoModel';
-import TodoService from './todoService';
+import { getTodos } from './todoService';
 import { Link } from 'react-router-dom';
 
 function Todos() {
   const [todoList, setTodoList] = useContext(TodoContext);
   const [loading, setLoading] = useState(false);
 
-  const getTodos = async () => {
+  const getTodoList = async () => {
     setLoading(true);
     try {
-      const response = await TodoService.getAll();
+      const response = await getTodos();
       setTodoList(response.data);
     } catch (error) {
       console.error(error);
@@ -21,7 +21,7 @@ function Todos() {
   };
 
   useEffect(() => {
-    if (!todoList.length) getTodos();
+    if (!todoList.length) getTodoList();
   }, []);
 
   return (

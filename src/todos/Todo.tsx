@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getFormKey } from '../shared/utils/formatHelper';
 import { ITodo, TodoDefault } from './todoModel';
-import TodoService from './todoService';
+import { createTodo, getTodo, updateTodo } from './todoService';
 
 function Todo() {
   const params = useParams();
@@ -11,14 +11,14 @@ function Todo() {
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    getTodo();
+    getTodoData();
   }, []);
 
-  const getTodo = async () => {
+  const getTodoData = async () => {
     setLoading(true);
     try {
       if (params.todoId && params.todoId !== 'new') {
-        const response = await TodoService.get(params.todoId);
+        const response = await getTodo(params.todoId);
         setTodo(response.data);
       }
     } catch (error) {
@@ -40,9 +40,9 @@ function Todo() {
     setSaving(true);
     try {
       if (params.todoId === 'new') {
-        await TodoService.create(todo);
+        await createTodo(todo);
       } else {
-        await TodoService.update(todo);
+        await updateTodo(todo);
       }
     } catch (error) {
       console.error(error);

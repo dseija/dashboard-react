@@ -8,32 +8,32 @@ const requestHandler: AxiosInstance = axios.create({
   },
 });
 
-export function getAll(resourceName: string): Promise<AxiosResponse> {
+export function requestGetAll(resourceName: string): Promise<AxiosResponse> {
   return requestHandler.get(resourceName);
 }
 
-export function get(
+export function requestGet(
   resourceName: string,
   id: number | string
 ): Promise<AxiosResponse> {
   return requestHandler.get(`${resourceName}/${id}`);
 }
 
-export function create(
+export function requestCreate(
   resourceName: string,
   data: any = {}
 ): Promise<AxiosResponse> {
   return requestHandler.post(resourceName, data);
 }
 
-export function update(
+export function requestUpdate(
   resourceName: string,
   data: any = {}
 ): Promise<AxiosResponse> {
   return requestHandler.get(`${resourceName}/${data.id}`, data);
 }
 
-export function remove(
+export function requestRemove(
   resourceName: string,
   id: number | string
 ): Promise<AxiosResponse> {
@@ -45,10 +45,12 @@ export function defaultRequestService(
   defaultResourceValue: any
 ) {
   return {
-    getAll: () => getAll(resourceName),
-    get: (id: number | string) => get(resourceName, id),
-    create: (data: typeof defaultResourceValue) => create(resourceName, data),
-    update: (data: typeof defaultResourceValue) => update(resourceName, data),
-    remove: (id: number | string) => remove(resourceName, id),
+    getAll: () => requestGetAll(resourceName),
+    get: (id: number | string) => requestGet(resourceName, id),
+    create: (data: typeof defaultResourceValue) =>
+      requestCreate(resourceName, data),
+    update: (data: typeof defaultResourceValue) =>
+      requestUpdate(resourceName, data),
+    remove: (id: number | string) => requestRemove(resourceName, id),
   };
 }
