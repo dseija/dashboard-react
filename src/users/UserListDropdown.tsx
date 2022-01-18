@@ -20,16 +20,16 @@ function UserListDropdown(props: IUserListDropdownProps) {
   }, []);
 
   const fetchUserList = async () => {
-    setLoading(false);
+    setLoading(true);
     try {
       if (!userList.length) {
         const response = await getUsers();
         setUserList(response.data);
-        setLoading(true);
       }
     } catch (error) {
       console.error(error);
     }
+    setLoading(false);
   };
 
   return (
@@ -38,18 +38,11 @@ function UserListDropdown(props: IUserListDropdownProps) {
       id={props.id}
       name={props.name}
       onChange={props.onChange}
+      value={props.selectedId}
     >
-      {loading && (
-        <option selected={!userList.length} value="0">
-          Loading...
-        </option>
-      )}
+      {loading && <option value="0">Loading...</option>}
       {userList.map((user: IUser) => (
-        <option
-          key={user.id}
-          value={user.id}
-          selected={props.selectedId === user.id}
-        >
+        <option key={user.id} value={user.id}>
           {user.name}
         </option>
       ))}

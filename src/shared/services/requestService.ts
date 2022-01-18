@@ -30,7 +30,7 @@ export function requestUpdate(
   resourceName: string,
   data: any = {}
 ): Promise<AxiosResponse> {
-  return requestHandler.get(`${resourceName}/${data.id}`, data);
+  return requestHandler.put(`${resourceName}/${data.id}`, data);
 }
 
 export function requestRemove(
