@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getFormKey } from '../shared/utils/formatHelper';
+import { getInputValue } from '../shared/utils/inputHelper';
 import UserListDropdown from '../users/UserListDropdown';
 import { ITodo, TodoDefault } from './todoModel';
 import { createTodo, getTodo, updateTodo } from './todoService';
@@ -32,10 +33,7 @@ function Todo() {
     const key = getFormKey(event.target.id, 'todo');
     setTodo({
       ...todo,
-      [key]:
-        event.target.type === 'checkbox'
-          ? event.target.checked
-          : event.target.value,
+      [key]: getInputValue(event.target),
     });
   };
 
