@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
+import Dropdown from '../shared/components/dropdown/Dropdown';
 import { UserContext } from './UserContext';
 import { IUser } from './userModel';
 import { getUsers } from './userService';
@@ -8,7 +9,7 @@ interface IUserListDropdownProps {
   key?: string;
   name: string;
   onChange: React.ChangeEventHandler<HTMLInputElement | HTMLSelectElement>;
-  selectedId?: number | string;
+  userId?: number | string;
 }
 
 function UserListDropdown(props: IUserListDropdownProps) {
@@ -33,20 +34,16 @@ function UserListDropdown(props: IUserListDropdownProps) {
   };
 
   return (
-    <select
-      key={props.key || 'user-list-dropdown'}
+    <Dropdown
       id={props.id}
       name={props.name}
       onChange={props.onChange}
-      value={props.selectedId}
-    >
-      {loading && <option value="0">Loading...</option>}
-      {userList.map((user: IUser) => (
-        <option key={user.id} value={user.id}>
-          {user.name}
-        </option>
-      ))}
-    </select>
+      items={userList.map((user: IUser) => ({
+        value: user.id,
+        text: user.name,
+      }))}
+      selectedItem={props.userId}
+    />
   );
 }
 
