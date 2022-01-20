@@ -1,13 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getFormKey } from '../shared/utils/formatHelper';
 import { getInputValue } from '../shared/utils/inputHelper';
 import UserListDropdown from '../users/UserListDropdown';
+import { TodoContext } from './TodoContext';
 import { ITodo, TodoDefault } from './todoModel';
 import { createTodo, getTodo, updateTodo } from './todoService';
 
 function Todo() {
   const params = useParams();
+
+  const [todoList, setTodoList] = useContext(TodoContext);
   const [todo, setTodo] = useState<ITodo>(TodoDefault);
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -40,12 +43,22 @@ function Todo() {
   const onSave: React.FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
     setSaving(true);
+    const todoData: ITodo = { ...todo, userId: Number(todo.userId) };
+    let todoListCopy = [...todoList];
     try {
       if (params.todoId === 'new') {
-        await createTodo(todo);
+        await createTodo(todoData);
+        todoListCopy = [...todoListCopy, todoData];
       } else {
-        await updateTodo({ ...todo, userId: Number(todo.userId) });
+        await updateTodo(todoData);
+        todoListCopy.splice(
+          todoList.findIndex((todoItem: ITodo) => todoItem.id === todoData.id),
+          1,
+          todoData
+        );
       }
+      console.log('todoListCopy', todoListCopy);
+      setTodoList([...todoListCopy]);
     } catch (error) {
       console.error(error);
     }

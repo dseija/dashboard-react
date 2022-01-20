@@ -21,6 +21,7 @@ function Todos() {
   };
 
   useEffect(() => {
+    console.log('todoList', todoList);
     if (!todoList.length) fetchTodoList();
   }, []);
 

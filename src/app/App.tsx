@@ -15,19 +15,14 @@ function App() {
       <hr />
 
       <UserProvider>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/users" element={<Users />} />
-          <Route
-            path="/todos"
-            element={
-              <TodoProvider>
-                <Todos />
-              </TodoProvider>
-            }
-          ></Route>
-          <Route path="/todos/:todoId" element={<Todo />} />
-        </Routes>
+        <TodoProvider>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/users" element={<Users />} />
+            <Route path="/todos" element={<Todos />}></Route>
+            <Route path="/todos/:todoId" element={<Todo />} />
+          </Routes>
+        </TodoProvider>
       </UserProvider>
     </BrowserRouter>
   );
