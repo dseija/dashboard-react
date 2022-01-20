@@ -5,7 +5,7 @@ import { getInputValue } from '../shared/utils/inputHelper';
 import UserListDropdown from '../users/UserListDropdown';
 import { TodoContext } from './TodoContext';
 import { ITodo, TodoDefault } from './todoModel';
-import { createTodo, getTodo, updateTodo } from './todoService';
+import { createTodo, getTodo, removeTodo, updateTodo } from './todoService';
 
 function Todo() {
   const params = useParams();
@@ -14,6 +14,7 @@ function Todo() {
   const [todo, setTodo] = useState<ITodo>(TodoDefault);
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
     getTodoData();
@@ -57,12 +58,29 @@ function Todo() {
           todoData
         );
       }
-      console.log('todoListCopy', todoListCopy);
       setTodoList([...todoListCopy]);
     } catch (error) {
       console.error(error);
     }
     setSaving(false);
+  };
+
+  const onDelete: React.MouseEventHandler<HTMLInputElement> = async (event) => {
+    event.preventDefault();
+    if (!todo.id) return;
+    setDeleting(true);
+    try {
+      await removeTodo(todo.id);
+      const todoListCopy = [...todoList];
+      todoListCopy.splice(
+        todoList.findIndex((todoItem: ITodo) => todoItem.id === todo.id),
+        1
+      );
+      setTodoList([...todoListCopy]);
+    } catch (error) {
+      console.error(error);
+    }
+    setDeleting(false);
   };
 
   return (
@@ -99,6 +117,12 @@ function Todo() {
           />
         </div>
         <div>
+          <input
+            type="button"
+            disabled={deleting}
+            value={deleting ? 'Deleting...' : 'Delete'}
+            onClick={onDelete}
+          />
           <input
             type="submit"
             disabled={saving}
