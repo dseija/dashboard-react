@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
 
-function Header() {
+function Sidebar() {
   return (
-    <div className="app-header">
+    <div className="app-sidebar">
       <ul>
         <li>
           <Link to="/">Home</Link>
@@ -18,4 +18,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default Sidebar;

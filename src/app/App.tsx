@@ -4,13 +4,13 @@ import TodoProvider from '../todos/TodoContext';
 import Todo from '../todos/Todo';
 import Todos from '../todos/Todos';
 import Users from '../users/Users';
-import Header from './Header';
+import Sidebar from './Sidebar';
 import UserProvider from '../users/UserContext';
 
 function App() {
   return (
     <BrowserRouter>
-      <Header />
+      <Sidebar />
 
       <hr />
 
