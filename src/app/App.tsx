@@ -10,20 +10,27 @@ import UserProvider from '../users/UserContext';
 function App() {
   return (
     <BrowserRouter>
-      <Sidebar />
-
-      <hr />
-
-      <UserProvider>
-        <TodoProvider>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/users" element={<Users />} />
-            <Route path="/todos" element={<Todos />}></Route>
-            <Route path="/todos/:todoId" element={<Todo />} />
-          </Routes>
-        </TodoProvider>
-      </UserProvider>
+      <main className="flex flex-col h-screen">
+        <header className="flex">Header</header>
+        <div className="flex flex-1 overflow-hidden">
+          <nav className="flex">
+            <Sidebar />
+          </nav>
+          <section className="flex flex-1 overflow-y-auto">
+            <UserProvider>
+              <TodoProvider>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/users" element={<Users />} />
+                  <Route path="/todos" element={<Todos />}></Route>
+                  <Route path="/todos/:todoId" element={<Todo />} />
+                </Routes>
+              </TodoProvider>
+            </UserProvider>
+          </section>
+        </div>
+        <footer className="flex">Footer</footer>
+      </main>
     </BrowserRouter>
   );
 }
