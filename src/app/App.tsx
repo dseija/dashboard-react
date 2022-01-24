@@ -13,7 +13,7 @@ function App() {
       <main className="flex flex-col h-screen">
         <header className="flex">Header</header>
         <div className="flex flex-1 overflow-hidden">
-          <nav className="flex">
+          <nav className="flex bg-gray-700 text-white">
             <Sidebar />
           </nav>
           <section className="flex flex-1 overflow-y-auto">
