@@ -7,6 +7,7 @@ import Users from '../users/Users';
 import Sidebar from './Sidebar';
 import UserProvider from '../users/UserContext';
 import Header from './Header';
+import Footer from './Footer';
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
             </UserProvider>
           </section>
         </div>
-        <footer className="flex">Footer</footer>
+        <Footer />
       </main>
     </BrowserRouter>
   );
