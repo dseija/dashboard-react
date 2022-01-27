@@ -1,13 +1,10 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from '../home/Home';
+import { BrowserRouter } from 'react-router-dom';
 import TodoProvider from '../todos/TodoContext';
-import Todo from '../todos/Todo';
-import Todos from '../todos/Todos';
-import Users from '../users/Users';
 import Sidebar from './Sidebar';
 import UserProvider from '../users/UserContext';
 import Header from './Header';
 import Footer from './Footer';
+import AppRoutes from './AppRoutes';
 
 function App() {
   return (
@@ -19,12 +16,7 @@ function App() {
           <section className="flex flex-1 overflow-y-auto">
             <UserProvider>
               <TodoProvider>
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/users" element={<Users />} />
-                  <Route path="/todos" element={<Todos />}></Route>
-                  <Route path="/todos/:todoId" element={<Todo />} />
-                </Routes>
+                <AppRoutes />
               </TodoProvider>
             </UserProvider>
           </section>
