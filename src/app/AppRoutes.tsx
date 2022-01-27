@@ -1,25 +1,36 @@
 import { Route, Routes } from 'react-router-dom';
 import Home from '../home/Home';
-import { ROUTES, ROUTE_NAME } from '../shared/constants/route';
+import {
+  RouteName,
+  RoutePath,
+  ROUTE_NAME,
+  ROUTE_PATH,
+} from '../shared/constants/route';
 import Todo from '../todos/Todo';
 import Todos from '../todos/Todos';
 import Users from '../users/Users';
 
+interface IRouterRoute {
+  name: RouteName;
+  path: RoutePath;
+  element: JSX.Element;
+}
+
 function AppRoutes() {
-  const routeElements: { [prop: string]: JSX.Element } = {
-    [ROUTE_NAME.HOME]: <Home />,
-    [ROUTE_NAME.USERS]: <Users />,
-    [ROUTE_NAME.TODOS]: <Todos />,
-    [ROUTE_NAME.TODO]: <Todo />,
-  };
+  const routes: IRouterRoute[] = [
+    { name: ROUTE_NAME.HOME, path: ROUTE_PATH.HOME, element: <Home /> },
+    { name: ROUTE_NAME.USERS, path: ROUTE_PATH.USERS, element: <Users /> },
+    { name: ROUTE_NAME.TODOS, path: ROUTE_PATH.TODOS, element: <Todos /> },
+    { name: ROUTE_NAME.TODO, path: ROUTE_PATH.TODO, element: <Todo /> },
+  ];
 
   return (
     <Routes>
-      {ROUTES.map((route) => (
+      {routes.map((route) => (
         <Route
           key={`route_${route.name}`}
           path={route.path}
-          element={routeElements[route.name]}
+          element={route.element}
         />
       ))}
     </Routes>

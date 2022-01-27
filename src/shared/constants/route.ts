@@ -1,18 +1,23 @@
-interface IRoute {
-  name: string;
-  path: string;
-}
-
 export enum ROUTE_NAME {
   HOME = 'home',
   USERS = 'users',
   TODOS = 'todos',
   TODO = 'todo',
 }
+export type RouteName = ROUTE_NAME;
 
-export const ROUTES: IRoute[] = [
-  { name: ROUTE_NAME.HOME, path: '/' },
-  { name: ROUTE_NAME.USERS, path: '/users' },
-  { name: ROUTE_NAME.TODOS, path: '/todos' },
-  { name: ROUTE_NAME.TODO, path: '/todos/:todoId' },
-];
+export enum ROUTE_PATH {
+  HOME = '/',
+  USERS = '/users',
+  TODOS = '/todos',
+  TODO = '/todos/:todoId',
+}
+export type RoutePath = ROUTE_PATH;
+
+export enum ROUTE_TEXT {
+  HOME = 'Home',
+  USERS = 'Users',
+  TODOS = 'Todos',
+  TODO = 'Todo',
+}
+export type RouteText = ROUTE_TEXT;
