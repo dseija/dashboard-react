@@ -6,16 +6,15 @@ import Todos from '../todos/Todos';
 import Users from '../users/Users';
 import Sidebar from './Sidebar';
 import UserProvider from '../users/UserContext';
+import Header from './Header';
 
 function App() {
   return (
     <BrowserRouter>
       <main className="flex flex-col h-screen">
-        <header className="flex">Header</header>
+        <Header />
         <div className="flex flex-1 overflow-hidden">
-          <nav className="flex bg-gray-700 text-white">
-            <Sidebar />
-          </nav>
+          <Sidebar />
           <section className="flex flex-1 overflow-y-auto">
             <UserProvider>
               <TodoProvider>

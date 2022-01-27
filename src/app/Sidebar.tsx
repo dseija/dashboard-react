@@ -13,25 +13,23 @@ function Sidebar() {
   ];
 
   return (
-    <ul className="w-48">
+    <nav className="bg-gray-700 w-48 text-white">
       {links.map((link) => (
-        <li>
-          <NavLink
-            className={({ isActive }) =>
-              `flex p-4 cursor-pointer ${
-                isActive
-                  ? 'bg-gray-800 border-r-4 border-blue-600'
-                  : 'hover:bg-blue-600'
-              }`
-            }
-            to={link.route}
-          >
-            <span className="icon mr-2">{link.icon}</span>
-            <span className="text">{link.text}</span>
-          </NavLink>
-        </li>
+        <NavLink
+          className={({ isActive }) =>
+            `flex py-4 px-6 cursor-pointer ${
+              isActive
+                ? 'bg-gray-800 border-r-4 border-blue-600'
+                : 'hover:bg-blue-600'
+            }`
+          }
+          to={link.route}
+        >
+          <span className="icon mr-2">{link.icon}</span>
+          <span className="text">{link.text}</span>
+        </NavLink>
       ))}
-    </ul>
+    </nav>
   );
 }
 
