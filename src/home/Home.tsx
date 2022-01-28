@@ -1,9 +1,9 @@
 function Home() {
   return (
-    <div>
+    <section className="p-6">
       <h2>Home</h2>
       <p>Home View</p>
-    </div>
+    </section>
   );
 }
 

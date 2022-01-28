@@ -13,7 +13,7 @@ function App() {
         <Header />
         <div className="flex flex-1 overflow-hidden">
           <Sidebar />
-          <section className="flex flex-1 overflow-y-auto">
+          <section className="flex-1 overflow-y-auto bg-gray-100">
             <UserProvider>
               <TodoProvider>
                 <AppRoutes />

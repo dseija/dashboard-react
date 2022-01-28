@@ -84,7 +84,7 @@ function Todo() {
   };
 
   return (
-    <div>
+    <section className="p-6">
       {loading && <p>Loading Todo...</p>}
       <form onSubmit={onSave}>
         <div>
@@ -130,7 +130,7 @@ function Todo() {
           />
         </div>
       </form>
-    </div>
+    </section>
   );
 }
 

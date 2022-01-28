@@ -1,9 +1,9 @@
 function Users() {
   return (
-    <div>
+    <section className="p-6">
       <h2>Users</h2>
       <p>Users View</p>
-    </div>
+    </section>
   );
 }
 
