@@ -27,7 +27,7 @@ function Todos() {
   return (
     <section className="p-6">
       {loading && <p>Loading Todos...</p>}
-      <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <ul className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {todoList.map((todo: ITodo) => (
           <li key={todo.id}>
             <Link to={`/todos/${todo.id}`} key={todo.id}>
