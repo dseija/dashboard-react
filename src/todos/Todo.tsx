@@ -84,50 +84,64 @@ function Todo() {
   };
 
   return (
-    <section className="p-6">
+    <section className="bg-white m-6 p-6 rounded-md shadow">
       {loading && <p>Loading Todo...</p>}
       <form onSubmit={onSave}>
-        <div>
-          <label>Title</label>
-          <input
-            type="text"
-            name="todo-title"
-            id="todo-title"
-            onChange={onChange}
-            value={todo.title}
-          />
-        </div>
-        <div>
-          <label>Completed</label>
-          <input
-            type="checkbox"
-            name="todo-completed"
-            id="todo-completed"
-            onChange={onChange}
-            checked={todo.completed}
-          ></input>
-        </div>
-        <div>
-          <label>User</label>
-          <UserListDropdown
-            id="todo-userId"
-            name="todo-userId"
-            onChange={onChange}
-            userId={todo.userId}
-          />
-        </div>
-        <div>
-          <input
-            type="button"
-            disabled={deleting}
-            value={deleting ? 'Deleting...' : 'Delete'}
-            onClick={onDelete}
-          />
-          <input
-            type="submit"
-            disabled={saving}
-            value={saving ? 'Saving...' : 'Save'}
-          />
+        <div className="grid grid-cols-3 gap-6">
+          <div className="col-span-6">
+            <label
+              htmlFor="todo-title"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Title
+            </label>
+            <input
+              className="mt-1 px-3 py-2 block w-full shadow-sm text-sm border border-gray-300 rounded-md focus:outline-none focus:border-blue-600"
+              type="text"
+              name="todo-title"
+              id="todo-title"
+              onChange={onChange}
+              value={todo.title}
+            />
+          </div>
+          <div className="col-span-6 flex items-center">
+            <input
+              className="h-4 w-4 text-blue-600 border border-gray-300 rounded"
+              type="checkbox"
+              name="todo-completed"
+              id="todo-completed"
+              onChange={onChange}
+              checked={todo.completed}
+            ></input>
+            <label
+              htmlFor="todo-completed"
+              className="ml-3 block text-sm font-medium text-gray-700"
+            >
+              Completed
+            </label>
+          </div>
+          <div className="col-span-6">
+            <label>User</label>
+            <UserListDropdown
+              id="todo-userId"
+              name="todo-userId"
+              onChange={onChange}
+              userId={todo.userId}
+            />
+          </div>
+          <div>
+            <input
+              type="button"
+              disabled={deleting}
+              value={deleting ? 'Deleting...' : 'Delete'}
+              onClick={onDelete}
+            />
+            <input
+              type="submit"
+              disabled={saving}
+              value={saving ? 'Saving...' : 'Save'}
+            />
+          </div>
         </div>
       </form>
     </section>
